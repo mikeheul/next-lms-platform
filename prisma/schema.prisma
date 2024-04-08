@@ -47,3 +47,5 @@ model Attachment {
 
   @@index([courseId])
 }
+
+// npx prisma generate
