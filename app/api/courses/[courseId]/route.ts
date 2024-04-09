@@ -7,14 +7,19 @@ export async function PATCH(
     { params }: { params: { courseId: string }} // courseId like folder name "courseId"
 ) {
     try {
+        // Extracting userId from the auth object
         const { userId } = auth();
+        // Extracting courseId from the params object
         const { courseId } = params;
+        // Parsing JSON data from the request body
         const values = await req.json();
 
+        // If userId is falsy, return Unauthorized response
         if(!userId) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
 
+        // Updating the course in the database
         const course = await db.course.update({
             where: {
                 id: courseId,
@@ -25,6 +30,7 @@ export async function PATCH(
             }
         })
 
+        // Returning JSON response with the updated course
         return NextResponse.json(course);
 
     } catch (error) {
