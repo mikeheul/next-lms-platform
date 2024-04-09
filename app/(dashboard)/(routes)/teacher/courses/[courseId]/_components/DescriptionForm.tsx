@@ -1,12 +1,15 @@
 "use client";
 
+// Importing Zod library for schema validation
 import * as z from "zod";
+// Importing Axios for making HTTP requests
 import axios from "axios";
-// likely used in a form library like React Hook Form to integrate with Zod schema validation for form inputs.
+// Importing zodResolver from "@hookform/resolvers/zod" for integrating Zod schema validation with React Hook Form
 import { zodResolver } from "@hookform/resolvers/zod";
+// Importing React Hook Form for managing form state
 import { useForm } from "react-hook-form";
-import { Course } from "@prisma/client";
 
+// Importing UI components for form styling
 import {
     Form,
     FormControl,
@@ -15,57 +18,79 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
+// Importing Button component for form buttons
 import { Button } from "@/components/ui/button";
+// Importing Pencil icon from lucide-react
 import { Pencil } from "lucide-react";
+// Importing useState hook for managing component state
 import { useState } from "react";
+// Importing toast for displaying notifications
 import toast from "react-hot-toast";
+// Importing useRouter hook from next/navigation for navigating within the application
 import { useRouter } from "next/navigation";
+// Importing cn function from "@/lib/utils" for conditional classnames
 import { cn } from "@/lib/utils";
+// Importing Textarea component for multi-line text input fields
 import { Textarea } from "@/components/ui/textarea";
+import { Course } from "@prisma/client";
 
+// Define props interface for DescriptionForm component
 interface DescriptionFormProps {
     initialData: Course;
     courseId: string;
-};
+}
 
+// Defining form schema using Zod
 const formSchema = z.object({
     description: z.string().min(1, {
         message: "Description is required"
     })
-})
+});
 
+// Define the DescriptionForm component
 const DescriptionForm = ({
     initialData,
     courseId
 }: DescriptionFormProps) => {
 
+    // State variable for controlling editing mode
     const [isEditing, setIsEditing] = useState(false);
 
+    // Function to toggle editing mode
     const toggleEdit = () => setIsEditing((current) => !current);
 
+    // useRouter hook for navigation
     const router = useRouter();
 
+    // useForm hook for managing form state
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             description: initialData?.description || ""
         }
-    })
+    });
 
-    const { isSubmitting, isValid} = form.formState;
+    // Destructuring formState properties
+    const { isSubmitting, isValid } = form.formState;
 
+    // Function to handle form submission
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        //console.log(values)
         try {
-            await axios.patch(`/api/courses/${courseId}`, values)
-            toast.success("Course updated !")
+            // Sending PATCH request to update course
+            await axios.patch(`/api/courses/${courseId}`, values);
+            // Displaying success notification
+            toast.success("Course updated !");
+            // Exiting edit mode
             toggleEdit();
+            // Refreshing page
             router.refresh();
         } catch {
-            toast.error("Something went wrong")
+            // Displaying error notification
+            toast.error("Something went wrong");
         }
-    }
+    };
 
+    // Rendering JSX for DescriptionForm component
     return ( 
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
@@ -126,4 +151,5 @@ const DescriptionForm = ({
     );
 }
 
+// Export the DescriptionForm component as the default export
 export default DescriptionForm;

@@ -1,3 +1,5 @@
+"use client";
+
 // Importing Zod library
 import * as z from "zod";
 // Importing Axios for making HTTP requests
