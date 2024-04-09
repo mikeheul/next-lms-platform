@@ -29,7 +29,7 @@ const CoursesPage = async () => {
             <div className="grid grid-cols-3 gap-x-2 gap-y-4 p-6">
                 {courses.map((course) => (
                     <Link
-                        className="flex flex-col p-6 border border-slate-200 rounded-md"
+                        className="flex flex-col p-6 border border-slate-200 rounded-md hover:bg-slate-100 transition duration-500"
                         key={course.id}
                         href={`/teacher/courses/${course.id}`}
                     >
