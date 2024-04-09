@@ -1,5 +1,8 @@
+// Importing the db object from the "@/lib/db" module
 import { db } from "@/lib/db";
+// Importing the auth object from the "@clerk/nextjs" module
 import { auth } from "@clerk/nextjs";
+// Importing the NextResponse object from the "next/server" module
 import { NextResponse } from "next/server";
 
 export async function PATCH(
