@@ -4,20 +4,6 @@
 import * as z from "zod";
 // Importing Axios for making HTTP requests
 import axios from "axios";
-// Importing zodResolver from "@hookform/resolvers/zod" for integrating Zod schema validation with React Hook Form
-import { zodResolver } from "@hookform/resolvers/zod";
-// Importing React Hook Form for managing form state
-import { useForm } from "react-hook-form";
-
-// Importing UI components for form styling
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormMessage,
-} from "@/components/ui/form";
-
 // Importing Button component for form buttons
 import { Button } from "@/components/ui/button";
 // Importing Pencil icon from lucide-react
@@ -28,13 +14,10 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 // Importing useRouter hook from next/navigation for navigating within the application
 import { useRouter } from "next/navigation";
-// Importing cn function from "@/lib/utils" for conditional classnames
-import { cn } from "@/lib/utils";
-// Importing Textarea component for multi-line text input fields
-import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
-import Image from "next/image";
 import { FileUpload } from "@/components/FileUpload";
+
+import Image from "next/image";
 
 // Define props interface for DescriptionForm component
 interface ImageFormProps {
@@ -63,17 +46,6 @@ const ImageForm = ({
 
     // useRouter hook for navigation
     const router = useRouter();
-
-    // useForm hook for managing form state
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            imageUrl: initialData?.imageUrl || ""
-        }
-    });
-
-    // Destructuring formState properties
-    const { isSubmitting, isValid } = form.formState;
 
     // Function to handle form submission
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
