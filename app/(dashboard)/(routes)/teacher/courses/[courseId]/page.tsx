@@ -31,6 +31,12 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         }
     });
 
+    const categories = await db.category.findMany({
+        orderBy: {
+            name: "asc"
+        },
+    })
+
     // If course is not found, redirect to the home page
     if(!course) {
         return redirect("/")
