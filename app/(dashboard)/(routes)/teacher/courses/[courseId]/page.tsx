@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import TitleForm from "./_components/TitleForm";
 // Importing the DescriptionForm component from the "./_components/DescriptionForm" module
 import DescriptionForm from "./_components/DescriptionForm";
+import ImageForm from "./_components/ImageForm";
 
 // Define the CourseIdPage component as an async function
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
@@ -73,6 +74,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                         courseId={course.id}
                     />
                     <DescriptionForm
+                        initialData={course}
+                        courseId={course.id}
+                    />
+                    <ImageForm
                         initialData={course}
                         courseId={course.id}
                     />
