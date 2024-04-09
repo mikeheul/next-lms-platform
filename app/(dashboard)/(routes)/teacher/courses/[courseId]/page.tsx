@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 // Importing the auth object from the "@clerk/nextjs" module
 import { auth } from "@clerk/nextjs";
 // Importing the LayoutDashboard icon from the "lucide-react" module
-import { LayoutDashboard } from "lucide-react";
+import { CircleDollarSign, LayoutDashboard, ListChecks } from "lucide-react";
 // Importing the redirect function from the "next/navigation" module
 import { redirect } from "next/navigation";
 // Importing the TitleForm component from the "./_components/TitleForm" module
@@ -14,6 +14,7 @@ import TitleForm from "./_components/TitleForm";
 import DescriptionForm from "./_components/DescriptionForm";
 import ImageForm from "./_components/ImageForm";
 import CategoryForm from "./_components/CategoryForm";
+import PriceForm from "./_components/PriceForm";
 
 // Define the CourseIdPage component as an async function
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
@@ -97,6 +98,32 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                             value: category.id,
                         }))}
                     />
+                </div>
+                {/* 2nd section */}
+                <div className="space-y-6">
+                    <div>
+                        <div className="flex items-center gap-x-2">
+                            <IconBadge icon={ListChecks} />
+                            <h2 className="text-xl">
+                                Course chapters
+                            </h2>
+                        </div>
+                        <div>
+                            TODO: Chapters
+                        </div>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-x-2">
+                            <IconBadge icon={CircleDollarSign} />
+                            <h2 className="text-xl">
+                                Sell your course
+                            </h2>
+                        </div>
+                        <PriceForm 
+                            initialData={course}
+                            courseId={course.id}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
