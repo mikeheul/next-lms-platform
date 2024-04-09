@@ -5,6 +5,7 @@ import axios from "axios";
 // likely used in a form library like React Hook Form to integrate with Zod schema validation for form inputs.
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Course } from "@prisma/client";
 
 import {
     Form,
@@ -23,10 +24,8 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 
 interface DescriptionFormProps {
-    initialData: {
-        description: string;
-    };
-    courseId: string
+    initialData: Course;
+    courseId: string;
 };
 
 const formSchema = z.object({
@@ -48,7 +47,9 @@ const DescriptionForm = ({
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: initialData
+        defaultValues: {
+            description: initialData?.description || ""
+        }
     })
 
     const { isSubmitting, isValid} = form.formState;
