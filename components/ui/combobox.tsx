@@ -12,43 +12,46 @@ import {
     CommandInput,
     CommandItem,
 } from "@/components/ui/command"
+
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { CommandList } from "cmdk"
 
 interface ComboboxProps {
-    options: { label: string, value: string }[];
+    options: { label: string; value: string }[];
     value?: string;
     onChange: (value: string) => void;
-}
+};
 
 export const Combobox = ({
-    options, 
-    value, 
+    options,
+    value,
     onChange
 }: ComboboxProps) => {
     const [open, setOpen] = React.useState(false)
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-                <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="w-[200px] justify-between"
-                    >
-                    {value
-                        ? options.find((option) => option.value === value)?.label
-                        : "Select option..."}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
-                <Command>
-                    <CommandInput placeholder="Search option..." />
+        <PopoverTrigger asChild>
+            <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={open}
+                className="w-full justify-between"
+            >
+                {value
+                    ? options.find((option) => option.value === value)?.label
+                    : "Select option..."}
+                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-full p-0">
+            <Command>
+                <CommandInput placeholder="Search option..." />
+                <CommandList>
                     <CommandEmpty>No option found.</CommandEmpty>
                     <CommandGroup>
                         {options.map((option) => (
@@ -69,8 +72,9 @@ export const Combobox = ({
                         </CommandItem>
                         ))}
                     </CommandGroup>
-                </Command>
-            </PopoverContent>
+                </CommandList>
+            </Command>
+        </PopoverContent>
         </Popover>
     )
 }
