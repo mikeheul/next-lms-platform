@@ -74,9 +74,9 @@ const ChapterTitleForm = ({
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             // Sending PATCH request to update course
-            await axios.patch(`/api/courses/${courseId}`, values);
+            await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
             // Displaying success notification
-            toast.success("Course updated !");
+            toast.success("Chapter updated !");
             // Exiting edit mode
             toggleEdit();
             // Refreshing page
