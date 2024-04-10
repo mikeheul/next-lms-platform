@@ -36,9 +36,9 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             attachments: {
                 orderBy: {
                     createdAt: 'desc'
-                }
-            }
-        }
+                },
+            },
+        },
     });
 
     const categories = await db.category.findMany({
