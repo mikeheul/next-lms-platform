@@ -7,7 +7,7 @@ import axios from "axios";
 // Importing Button component for form buttons
 import { Button } from "@/components/ui/button";
 // Importing Pencil icon from lucide-react
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { File, ImageIcon, Pencil, PlusCircle } from "lucide-react";
 // Importing useState hook for managing component state
 import { useState } from "react";
 // Importing toast for displaying notifications
@@ -51,7 +51,7 @@ const AttachmentForm = ({
             // Sending PATCH request to update course
             await axios.post(`/api/courses/${courseId}/attachments`, values);
             // Displaying success notification
-            toast.success("Image updated !");
+            toast.success("Attachment added !");
             // Exiting edit mode
             toggleEdit();
             // Refreshing page
@@ -62,7 +62,7 @@ const AttachmentForm = ({
         }
     };
 
-    // Rendering JSX for DescriptionForm component
+    // Rendering JSX for AttachmentForm component
     return ( 
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
@@ -84,6 +84,20 @@ const AttachmentForm = ({
                 <>
                     {initialData.attachments.length === 0 && (
                         <p className="text-sm mt-2 text-slate-500 italic">No attachments yet</p>
+                    )}
+
+                    {initialData.attachments.length > 0 && (
+                        <div className="space-y-2">
+                            {initialData.attachments.map((attachment) => (
+                                <div
+                                    key={attachment.id}
+                                    className="flex items-center p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md"
+                                >
+                                    <File className="h-4 w-4 mr-2 flex-shrink-0" />
+                                    <p className="text-xs line-clamp-1">{attachment.name}</p>
+                                </div>
+                            ))}
+                        </div>
                     )}
                 </>
             )}
