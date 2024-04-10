@@ -16,6 +16,7 @@ import ImageForm from "./_components/ImageForm";
 import CategoryForm from "./_components/CategoryForm";
 import PriceForm from "./_components/PriceForm";
 import AttachmentForm from "./_components/AttachmentForm";
+import ChaptersForm from "./_components/ChaptersForm";
 
 // Define the CourseIdPage component as an async function
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
@@ -30,7 +31,8 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     // Finding the course with the given courseId from the database
     const course = await db.course.findUnique({
         where: {
-            id: params.courseId
+            id: params.courseId,
+            userId: userId
         },
         include: {
             attachments: {
@@ -38,6 +40,11 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                     createdAt: 'desc'
                 },
             },
+            chapters: {
+                orderBy: {
+                    position: 'asc'
+                }
+            }
         },
     });
 
@@ -59,6 +66,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         course.imageUrl,
         course.price,
         course.categoryId,
+        course.chapters.some(chapter => chapter.isPublished)
     ];
 
     // Calculating the total number of required fields and completed fields
@@ -121,9 +129,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                                 Course chapters
                             </h2>
                         </div>
-                        <div>
-                            TODO: Chapters
-                        </div>
+                        <ChaptersForm
+                            initialData={course}
+                            courseId={course.id}
+                        />
                     </div>
                     {/* Price form card */}
                     <div>
