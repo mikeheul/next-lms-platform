@@ -7,7 +7,7 @@ import axios from "axios";
 // Importing Button component for form buttons
 import { Button } from "@/components/ui/button";
 // Importing Pencil icon from lucide-react
-import { File, ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { File, ImageIcon, Loader2, Pencil, PlusCircle, X } from "lucide-react";
 // Importing useState hook for managing component state
 import { useState } from "react";
 // Importing toast for displaying notifications
@@ -38,6 +38,8 @@ const AttachmentForm = ({
 
     // State variable for controlling editing mode
     const [isEditing, setIsEditing] = useState(false);
+    const [deletingId, setDeletingId] = useState<string | null>(null);
+
 
     // Function to toggle editing mode
     const toggleEdit = () => setIsEditing((current) => !current);
@@ -95,6 +97,18 @@ const AttachmentForm = ({
                                 >
                                     <File className="h-4 w-4 mr-2 flex-shrink-0" />
                                     <p className="text-xs line-clamp-1">{attachment.name}</p>
+                                    {deletingId === attachment.id && (
+                                        <div>
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                        </div>
+                                    )}
+                                    {deletingId !== attachment.id && (
+                                        <button
+                                            className="ml-auto hover:opacity-75 transition"
+                                        >
+                                            <X className="h-4 w-4" />
+                                        </button>
+                                    )}
                                 </div>
                             ))}
                         </div>
