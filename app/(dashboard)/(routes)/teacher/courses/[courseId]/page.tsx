@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 // Importing the auth object from the "@clerk/nextjs" module
 import { auth } from "@clerk/nextjs";
 // Importing the LayoutDashboard icon from the "lucide-react" module
-import { CircleDollarSign, LayoutDashboard, ListChecks } from "lucide-react";
+import { CircleDollarSign, File, LayoutDashboard, ListChecks } from "lucide-react";
 // Importing the redirect function from the "next/navigation" module
 import { redirect } from "next/navigation";
 // Importing the TitleForm component from the "./_components/TitleForm" module
@@ -15,6 +15,7 @@ import DescriptionForm from "./_components/DescriptionForm";
 import ImageForm from "./_components/ImageForm";
 import CategoryForm from "./_components/CategoryForm";
 import PriceForm from "./_components/PriceForm";
+import AttachmentForm from "./_components/AttachmentForm";
 
 // Define the CourseIdPage component as an async function
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
@@ -30,6 +31,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     const course = await db.course.findUnique({
         where: {
             id: params.courseId
+        },
+        include: {
+            attachments: {
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            }
         }
     });
 
@@ -70,7 +78,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                {/* 1st section */}
+                {/* ----------------- 1st section ----------------- */}
                 <div>
                     <div className="flex items-center gap-x-2">
                         <IconBadge 
@@ -78,18 +86,22 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                         />
                         <h2 className="text-xl">Customize your course</h2>
                     </div>
+                    {/* Title form card */}
                     <TitleForm
                         initialData={course}
                         courseId={course.id}
                     />
+                    {/* Description form card */}
                     <DescriptionForm
                         initialData={course}
                         courseId={course.id}
                     />
+                    {/* Image form card */}
                     <ImageForm
                         initialData={course}
                         courseId={course.id}
                     />
+                    {/* Category form card */}
                     <CategoryForm
                         initialData={course}
                         courseId={course.id}
@@ -97,10 +109,11 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                             label: category.name,
                             value: category.id,
                         }))}
-                    />
+                        />
                 </div>
-                {/* 2nd section */}
+                {/* ----------------- 2nd section ----------------- */}
                 <div className="space-y-6">
+                    {/* Course chapters form card */}
                     <div>
                         <div className="flex items-center gap-x-2">
                             <IconBadge icon={ListChecks} />
@@ -112,6 +125,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                             TODO: Chapters
                         </div>
                     </div>
+                    {/* Price form card */}
                     <div>
                         <div className="flex items-center gap-x-2">
                             <IconBadge icon={CircleDollarSign} />
@@ -120,6 +134,18 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                             </h2>
                         </div>
                         <PriceForm 
+                            initialData={course}
+                            courseId={course.id}
+                        />
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-x-2">
+                            <IconBadge icon={File} />
+                            <h2 className="text-xl">
+                                Ressources & Attachments
+                            </h2>
+                        </div>
+                        <AttachmentForm
                             initialData={course}
                             courseId={course.id}
                         />
