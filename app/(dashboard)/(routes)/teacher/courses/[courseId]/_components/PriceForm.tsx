@@ -30,8 +30,6 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 // Importing cn function from "@/lib/utils" for conditional classnames
 import { cn } from "@/lib/utils";
-// Importing Textarea component for multi-line text input fields
-import { Textarea } from "@/components/ui/textarea";
 import { Course } from "@prisma/client";
 import { Input } from "@/components/ui/input";
 import { formatPrice } from "@/lib/format";
