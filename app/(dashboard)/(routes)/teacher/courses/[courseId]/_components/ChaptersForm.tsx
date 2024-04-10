@@ -21,7 +21,7 @@ import {
 // Importing Button component for form buttons
 import { Button } from "@/components/ui/button";
 // Importing Pencil icon from lucide-react
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Loader2 } from "lucide-react";
 // Importing useState hook for managing component state
 import { useState } from "react";
 // Importing toast for displaying notifications
@@ -104,9 +104,20 @@ const ChaptersForm = ({
         }
     }
 
+    const onEdit = (id: string) => {
+        router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+    }
+
     // Rendering JSX for ChaptersForm component
     return ( 
-        <div className="mt-6 border bg-slate-100 rounded-md p-4">
+        <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
+            {isUpdating && (
+                <div className="absolute h-full w-full bg-slate-500/20 top-0 right-0 rounded-m flex items-center justify-center">
+                    <Loader2 
+                        className="animate-spin h-6 w-6 text-sky-700"
+                    />
+                </div>
+            )}
             <div className="font-medium flex items-center justify-between">
                 Course chapters
                 <Button onClick={toggleCreating} variant="ghost">
@@ -158,7 +169,7 @@ const ChaptersForm = ({
                 )}>
                     {!initialData.chapters.length && "No chapters"}
                     <ChaptersList 
-                        onEdit={() => {}}
+                        onEdit={onEdit}
                         onReorder={onReorder}
                         items={initialData.chapters || []}
                     />
