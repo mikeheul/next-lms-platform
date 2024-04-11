@@ -86,7 +86,6 @@ const ChapterIdPage = async({
                         courseId={params.courseId}
                         chapterId={params.chapterId}
                     />
-                </div>
                 <div>
                     <div className="flex items-center gap-x-2">
                         <IconBadge icon={Eye} />
@@ -99,6 +98,7 @@ const ChapterIdPage = async({
                         courseId={params.courseId}
                         chapterId={params.chapterId}
                     />
+                </div>
                 </div>
             </div>
         </div>
