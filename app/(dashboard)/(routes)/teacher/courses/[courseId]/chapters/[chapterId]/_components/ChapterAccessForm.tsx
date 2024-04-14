@@ -46,6 +46,7 @@ interface ChapterAccessFormProps {
 }
 
 // Defining form schema using Zod
+// Zod is designed to be as developer-friendly as possible. The goal is to eliminate duplicative type declarations. With Zod, you declare a validator once and Zod will automatically infer the static TypeScript type. It's easy to compose simpler types into complex data structures.
 const formSchema = z.object({
     isFree: z.boolean().default(false)
 });
