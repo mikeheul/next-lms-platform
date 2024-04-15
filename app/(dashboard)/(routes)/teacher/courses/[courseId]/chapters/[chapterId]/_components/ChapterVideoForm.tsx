@@ -95,6 +95,7 @@ const ChapterVideoForm = ({
                 ) : (
                     <div className="relative aspect-video mt-2">
                         video uploaded!
+                        Prepare Mux environment variables (mux.com)
                     </div>
                 )
             )}
