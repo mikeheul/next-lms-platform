@@ -9,6 +9,7 @@ import ChapterDescriptionForm from "./_components/ChapterDescriptionForm";
 import ChapterAccessForm from "./_components/ChapterAccessForm";
 import ChapterVideoForm from "./_components/ChapterVideoForm";
 import Banner from "@/components/Banner";
+import ChapterActions from "./_components/ChapterActions";
 
 const ChapterIdPage = async({
     params
