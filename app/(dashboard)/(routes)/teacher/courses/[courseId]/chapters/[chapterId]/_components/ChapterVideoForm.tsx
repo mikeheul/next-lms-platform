@@ -66,7 +66,7 @@ const ChapterVideoForm = ({
     return ( 
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course image
+                Chapter video
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing && (
                         <>Cancel</>
@@ -101,7 +101,7 @@ const ChapterVideoForm = ({
             {isEditing && (
                 <div>
                     <FileUpload 
-                        endpoint="courseImage"
+                        endpoint="chapterVideo"
                         onChange={(url) => {
                             if(url) {
                                 onSubmit({ videoUrl: url })
@@ -114,7 +114,7 @@ const ChapterVideoForm = ({
                 </div>
             )}
             {initialData.videoUrl && !isEditing && (
-                <div>
+                <div className="text-xs text-muted-foreground mt-2">
                     Videos can take a few minutes to process. Refresh the page if video does not appear.
                 </div>
             )}
