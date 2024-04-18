@@ -17,9 +17,8 @@ export async function PATCH(
                 userId
             },
         })
-        
 
-
+        // set isPublished to false 
         const unpublishedCourse = await db.course.update({
             where: {
                 id: params.courseId
