@@ -109,6 +109,7 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([userId, courseId]) // ensure that userprogress is the couple of user/course
   @@index([courseId])
 }
 
