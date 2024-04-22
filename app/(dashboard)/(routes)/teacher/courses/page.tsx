@@ -1,6 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { db } from "@/lib/db";
+import { DataTable } from "./_components/DataTable";
+import { columns } from "./_components/columns";
+import { auth } from "@clerk/nextjs";
+import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 // async function getCourses() {
 
@@ -15,16 +20,29 @@ import { db } from "@/lib/db";
 
 const CoursesPage = async () => {
 
-    // const courses = await getCourses();
+    const { userId } = auth();
+
+    if(!userId) return redirect("/")
+
+    const courses = await db.course.findMany({
+        where: {
+            userId
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
 
     return (
         <div>
             <div className="p-6">
-                <Link href="/teacher/create">
+                {/* <Link href="/teacher/create">
                     <Button>
                         New Course
                     </Button>
-                </Link>
+                </Link> */}
+
+                <DataTable columns={columns} data={courses} />
             </div>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 p-6">
                 {courses.map((course) => (
