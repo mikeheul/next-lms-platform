@@ -19,7 +19,7 @@ const SearchInput = () => {
     const currentCategoryId = searchParams.get("categoryId");
 
     useEffect(() => {   
-        const url = queryString.stringify({
+        const url = queryString.stringifyUrl({
             url: pathname,
             query: {
                 categoryId: currentCategoryId,
