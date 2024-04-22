@@ -6,6 +6,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model Course {
@@ -70,6 +71,7 @@ model Chapter {
   updatedAt DateTime @updatedAt
 
   @@index([courseId])
+  @@fulltext([title])
 }
 
 model MuxData {
