@@ -4,7 +4,10 @@ import { NextResponse } from "next/server"
 
 import { db } from "@/lib/db"
 
-const { video } = new Mux();
+const { video } = new Mux({
+    tokenId: process.env.MUX_TOKEN_ID, 
+    tokenSecret: process.env.MUX_TOKEN_SECRET
+});
 
 export async function DELETE(
     req: Request,
@@ -137,7 +140,7 @@ export async function PATCH(
 
             const asset = await video.assets.create({
                 input: values.videoUrl,
-                // playback_policy: "public",
+                playback_policy: ['public'],
                 test: false
             })
 
