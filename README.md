@@ -1,4 +1,6 @@
-Tuto : 8:54:33
+To test Stripe checkout, please start localhost webhook
+https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
