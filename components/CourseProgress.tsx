@@ -1,3 +1,5 @@
+import { Progress } from "./ui/progress";
+
 interface CourseProgressProps {
     value: number;
     variant?: "default" | "success";
@@ -21,7 +23,10 @@ const CourseProgress = ({
 }: CourseProgressProps) => {
     return (
         <div>
-            
+            <Progress 
+                className="h-2"
+                value={value}
+            />
         </div>
     );
 }
