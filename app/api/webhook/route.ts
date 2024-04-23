@@ -1,4 +1,4 @@
-import Stripe from "stipe"
+import Stripe from "stripe"
 
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
@@ -40,4 +40,6 @@ export async function POST(req: Request) {
     } else {
         return new NextResponse(`Webhook error: unhandled event type ${event.type}`, { status: 200 })
     }
+
+    return new NextResponse(null, { status: 200 })
 }
