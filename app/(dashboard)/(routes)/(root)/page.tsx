@@ -1,7 +1,9 @@
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import CoursesList from "@/components/CoursesList";
 import { UserButton, auth } from "@clerk/nextjs";
+import { Clock } from "lucide-react";
 import { redirect } from "next/navigation";
+import InfoCard from "./_components/InfoCard";
 
 export default async function Dashboard() {
 
@@ -17,12 +19,11 @@ export default async function Dashboard() {
   return (
     <div className="p-6 space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          {/* info card */}
-        </div>
-        <div>
-          {/* info card */}
-        </div>
+        <InfoCard  
+          icon={Clock}
+          label="In Progress"
+          numberOfItems={coursesInProgress.length}
+        />
       </div>
       <CoursesList 
         items={[...coursesInProgress, ...completedCourses]}
