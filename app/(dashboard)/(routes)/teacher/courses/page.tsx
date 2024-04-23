@@ -4,7 +4,6 @@ import { db } from "@/lib/db";
 import { DataTable } from "./_components/DataTable";
 import { columns } from "./_components/columns";
 import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 
 // async function getCourses() {
@@ -29,7 +28,7 @@ const CoursesPage = async () => {
             userId
         },
         orderBy: {
-            createdAt: 'desc'
+            isPublished: 'desc'
         }
     })
 

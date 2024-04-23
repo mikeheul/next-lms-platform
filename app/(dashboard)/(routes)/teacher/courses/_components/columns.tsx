@@ -53,6 +53,43 @@ export const columns: ColumnDef<Course>[] = [
         }
     },
     {
+        accessorKey: "createdAt",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Created At
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+            const dateValue = row.getValue("createdAt");
+            
+            let date;
+            if (dateValue instanceof Date) {
+                date = dateValue; // If it's already a Date object, no need to convert
+            } else if (typeof dateValue === 'string') {
+                date = new Date(dateValue); // Convert if it's a string
+            } else {
+                date = new Date(); // Default to current date if unable to parse
+            }
+        
+            const formattedDate = new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            }).format(date);
+            
+            return <div>{formattedDate}</div>;
+        }
+    },
+    {
         accessorKey: "isPublished",
         header: ({ column }) => {
             return (

@@ -5,7 +5,9 @@ import { auth } from "@clerk/nextjs";
 // Importing the NextResponse object from the "next/server" module
 import { NextResponse } from "next/server";
 
-import Mux from "@mux/mux-node";7
+import Mux from "@mux/mux-node";
+
+import { isTeacher } from "@/lib/teacher";
 
 const { video } = new Mux({
     tokenId: process.env.MUX_TOKEN_ID, 
@@ -19,7 +21,7 @@ export async function DELETE(
     try {
         const { userId } = auth();
         
-        if(!userId) { return new NextResponse("Unauthorized", { status: 401 }) }
+        if(!userId || !isTeacher(userId)) { return new NextResponse("Unauthorized", { status: 401 }) }
 
         const course = await db.course.findUnique({
             where: {
@@ -70,7 +72,7 @@ export async function PATCH(
         const values = await req.json();
 
         // If userId is falsy, return Unauthorized response
-        if(!userId) {
+        if(!userId || !isTeacher(userId)) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
 
