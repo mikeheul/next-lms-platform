@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { getAnalytics } from "@/actions/get-analytics";
 import DataCard from "./_components/DataCard";
+import Chart from "./_components/Chart";
 
 const AnalyticsPage = async () => {
 
@@ -29,6 +30,9 @@ const AnalyticsPage = async () => {
                     value={totalSales}
                 />
             </div>
+            <Chart 
+                data={data}
+            />
         </div>
     );
 }
