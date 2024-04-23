@@ -30,7 +30,7 @@ type CombinedProgressProps = ProgressProps & React.ComponentPropsWithoutRef<type
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   CombinedProgressProps
->(({ className, value, ...props }, ref) => (
+>(({ className, value, variant, ...props }, ref) => (
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
