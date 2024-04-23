@@ -14,8 +14,8 @@
 
 
 -- Listage de la structure de la base pour next-lms
-CREATE DATABASE IF NOT EXISTS `next-lms` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `next-lms`;
+-- CREATE DATABASE IF NOT EXISTS `next-lms` /*!40100 DEFAULT CHARACTER SET latin1 */;
+-- USE `next-lms`;
 
 -- Listage de la structure de la table next-lms. attachment
 CREATE TABLE IF NOT EXISTS `attachment` (
