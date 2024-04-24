@@ -15,7 +15,7 @@ type GetCourses = {
     categoryId?: string;
 }
 
-// get courses with specific progress (or purchage if not)
+// get courses with specific progress (or purchase if not)
 export const getCourses = async ({
     userId,
     title,
