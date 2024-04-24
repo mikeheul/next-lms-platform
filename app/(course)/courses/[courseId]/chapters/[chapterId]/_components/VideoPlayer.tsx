@@ -73,6 +73,8 @@ const VideoPlayer = ({
             )}
             {!isLocked && (
                 <MuxPlayer 
+                    primaryColor="#fff"
+                    accentColor="#447588"
                     title={title}
                     className={cn(
                         !isReady && "hidden",
