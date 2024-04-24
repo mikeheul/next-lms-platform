@@ -35,6 +35,7 @@ const CourseEnrollButton = ({
 
     return (
         <Button 
+            variant="theme"
             onClick={onClick}
             disabled={isLoading}
             size="sm" 
