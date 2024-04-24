@@ -19,12 +19,13 @@ const SearchInput = () => {
     const currentCategoryId = searchParams.get("categoryId");
 
     useEffect(() => {   
+        
         const url = queryString.stringifyUrl({
             url: pathname,
             query: {
                 categoryId: currentCategoryId,
-                title: debouncedValue
-            }
+                title: debouncedValue,
+            },
         }, { skipNull: true, skipEmptyString: true });
 
         router.push(url)
