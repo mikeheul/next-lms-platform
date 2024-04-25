@@ -27,7 +27,7 @@ export const getCourses = async ({
                 isPublished: true,
                 title: {
                     contains: title,
-                    mode: 'insensitive'
+                    mode: 'insensitive' // search is case insensitive
                 },
                 categoryId
             },
